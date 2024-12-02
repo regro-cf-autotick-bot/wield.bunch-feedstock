@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wield.bunch-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/wield.bunch-{{ version }}.tar.gz
   sha256: 855fc2883c0eb14aebefe14c4374e52fdf419870499561cf5c37ad139a58778c
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=45
     - wheel
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - numpy
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/wieldphysics/wield-bunch
